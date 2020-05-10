@@ -1,0 +1,18 @@
+apply plugin: "kotlin"
+sourceSets.test.java.srcDirs = ["src/"]
+
+test {
+    useJUnitPlatform()
+    systemProperty 'junit.jupiter.conditions.deactivate', '*'
+    systemProperties = [
+            'junit.jupiter.extensions.autodetection.enabled': 'true',
+            'junit.jupiter.testinstance.lifecycle.default': 'per_class'
+    ]
+}
+
+dependencies {
+    api project(":core")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("org.mockito:mockito-core:$mockitoVersion")
+}
