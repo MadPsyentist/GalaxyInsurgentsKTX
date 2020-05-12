@@ -4,12 +4,14 @@ import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import ktx.ashley.allOf
+import ktx.ashley.mapperFor
 
-class MovementSystem : IteratingSystem(allOf(
-    PositionComponent::class,
-    VelocityComponent::class).get()) {
-    private val positionMap = ComponentMapper.getFor(PositionComponent::class.java)
-    private val velocityMap = ComponentMapper.getFor(VelocityComponent::class.java)
+class MovementSystem()
+    : IteratingSystem(allOf(
+        PositionComponent::class,
+        VelocityComponent::class).get()) {
+    private val positionMap = mapperFor<PositionComponent>()
+    private val velocityMap = mapperFor<VelocityComponent>()
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val positionComponent = positionMap[entity]
